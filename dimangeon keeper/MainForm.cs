@@ -134,14 +134,27 @@ namespace dimangeon_keeper
                 return;
 
             musicPlayer.settings.setMode("loop", false);
-            musicPlayer.settings.volume = 70; // по желанию
+            musicPlayer.settings.volume = 100; // по желанию
             musicPlayer.URL = path;
             musicPlayer.Ctlcontrols.play();
         }
 
+        //esc kak vixod
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Escape)
+            {
+                this.Close();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
 
         public MainForm()
         {
+            //dve stroki vne komitov 
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
 
             InitAudioPlayers();
             ExtractAllMp3FromResources();

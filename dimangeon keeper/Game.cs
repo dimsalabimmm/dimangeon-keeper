@@ -1477,7 +1477,8 @@ namespace dimangeon_keeper
         private readonly Font hubFont = new Font("Consolas", 14, FontStyle.Bold);
         private void DrawHub(Graphics g)
         {
-            Rectangle r = new Rectangle(0, 0, 850, 40);
+            //tut popravil razmer vne kommita
+            Rectangle r = new Rectangle(0, 0, 950, 40);
             Brush b = new SolidBrush(Color.Black);
             g.FillRectangle(b, r);
             g.DrawRectangle(Pens.Black, r);
