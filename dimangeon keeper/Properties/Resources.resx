@@ -118,11 +118,26 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="dig" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\dig.wav;System.IO.MemoryStream, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="dirt" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\dirt.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="dungeon_heart" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\dungeon_heart.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="fight1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fight1.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="fight2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fight2.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="fight3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\fight3.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="game_over" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\game_over.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="goldrock" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\goldrock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -138,6 +153,9 @@
   </data>
   <data name="lair_4" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\lair_4.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="portal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\portal.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="rock" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\rock.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -175,6 +193,9 @@
   <data name="sprite_portal" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\sprite_portal.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="startmp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\startmp.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="treasury_chest" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\treasury_chest.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -183,5 +204,8 @@
   </data>
   <data name="treasury_pile" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\treasury_pile.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="win" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\win.mp3;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

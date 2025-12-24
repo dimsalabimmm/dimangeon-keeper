@@ -61,6 +61,15 @@ namespace dimangeon_keeper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream dig {
+            get {
+                return ResourceManager.GetStream("dig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap dirt {
@@ -77,6 +86,46 @@ namespace dimangeon_keeper.Properties {
             get {
                 object obj = ResourceManager.GetObject("dungeon_heart", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] fight1 {
+            get {
+                object obj = ResourceManager.GetObject("fight1", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] fight2 {
+            get {
+                object obj = ResourceManager.GetObject("fight2", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] fight3 {
+            get {
+                object obj = ResourceManager.GetObject("fight3", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] game_over {
+            get {
+                object obj = ResourceManager.GetObject("game_over", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -127,6 +176,16 @@ namespace dimangeon_keeper.Properties {
             get {
                 object obj = ResourceManager.GetObject("lair_4", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] portal {
+            get {
+                object obj = ResourceManager.GetObject("portal", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -251,6 +310,16 @@ namespace dimangeon_keeper.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] startmp {
+            get {
+                object obj = ResourceManager.GetObject("startmp", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap treasury_chest {
@@ -277,6 +346,16 @@ namespace dimangeon_keeper.Properties {
             get {
                 object obj = ResourceManager.GetObject("treasury_pile", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] win {
+            get {
+                object obj = ResourceManager.GetObject("win", resourceCulture);
+                return ((byte[])(obj));
             }
         }
     }

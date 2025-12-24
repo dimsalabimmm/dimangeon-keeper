@@ -61,6 +61,9 @@
     <Compile Include="Tile.cs" />
     <Compile Include="TileType.cs" />
     <Compile Include="ToolMode.cs" />
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -149,6 +152,37 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\sprite_king1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\dig.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\startmp.mp3" />
+    <None Include="Resources\fight1.mp3" />
+    <None Include="Resources\fight2.mp3" />
+    <None Include="Resources\fight3.mp3" />
+    <None Include="Resources\win.mp3" />
+    <None Include="Resources\game_over.mp3" />
+    <None Include="Resources\portal.mp3" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="AxWMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="WMPLib">
+      <Guid>{6BF52A50-394A-11D3-B153-00C04F79FAA6}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

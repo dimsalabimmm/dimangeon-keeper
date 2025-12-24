@@ -10,6 +10,8 @@ using System.Runtime.InteropServices;
 using System.Diagnostics.Contracts;
 using System.Reflection;
 using System.Runtime.Remoting.Messaging;
+using System.Media;
+using System.IO;
 
 
 
@@ -125,6 +127,34 @@ namespace dimangeon_keeper
         private bool gameWon;
         private bool endShown;
         private string endMessage;
+
+
+        //zvuki
+        private SoundPlayer sndDig;
+        private float digSfxCooldown;
+
+        public event Action HitSfxRequested;
+        public event Action TeleportSfxRequested;
+        public event Action<bool> EndMusicRequested; // true=win, false=lose
+
+
+        private void InitDigSfxOnce()
+        {
+            if (sndDig != null) return;
+
+            // имя ресурса = то, что видно в Properties -> Resources (обычно без расширения)
+            sndDig = new SoundPlayer(Properties.Resources.dig);
+            sndDig.LoadAsync();
+        }
+
+        private void PlayDigSfx()
+        {
+            if (sndDig == null) return;
+            if (digSfxCooldown > 0f) return;
+
+            digSfxCooldown = 0.12f;
+            sndDig.Play();
+        }
 
 
         private void PrepareArtForTileSize()
@@ -550,7 +580,9 @@ namespace dimangeon_keeper
         }
         private void EndGame(bool won, string msg)
         {
+
             if (gameOver) return;
+            EndMusicRequested?.Invoke(won);
             gameOver = true;
             gameWon = won;
             endMessage = msg;
@@ -567,7 +599,7 @@ namespace dimangeon_keeper
         {
             CreateMap();
             PrepareArtForTileSize();
-            
+            InitDigSfxOnce();
             DirtBase(BaseX, BaseY, BaseW, BaseH);
 
             heartX = BaseX + BaseW / 2;
@@ -586,7 +618,8 @@ namespace dimangeon_keeper
             InitPortalSpriteOnce();
             InitChunkCache();
 
-            AddGoldToTreasury(2000);
+
+
 
             //создаем 4 импа
             for (int i = 0; i < 4; i++)
@@ -716,6 +749,7 @@ namespace dimangeon_keeper
             if (t.Type == TileType.Rock || t.Type == TileType.GoldRock)
             {
                 t.Type = TileType.Dirt;
+                PlayDigSfx();
                 t.HasDigJob = false;
                 MarkChunkDirtyByTile(x, y);
                 RecomputeClaimedFromHeart();
@@ -772,8 +806,8 @@ namespace dimangeon_keeper
             else
             {
                 // нормальный босс после победы над верхней волной
-                b.MaxHp = 650;
-                b.Hp = 650;
+                b.MaxHp = 800;
+                b.Hp = 800;
                 b.Damage = 26;
                 b.Speed = 2.2f;
             }
@@ -860,6 +894,8 @@ namespace dimangeon_keeper
                 {
                     attacker.AttackTimer = 0f;
                     target.Hp -= attacker.Damage;
+                    HitSfxRequested?.Invoke();
+
                     if (target.Hp <= 0)
                     {
                         target.Hp = 0;
@@ -908,6 +944,9 @@ namespace dimangeon_keeper
                 {
                     attacker.AttackTimer = 0f;
                     heartHp -= attacker.Damage;
+                    HitSfxRequested?.Invoke();
+                    
+
                     if (heartHp <= 0)
                     {
                         heartHp = 0;
@@ -975,8 +1014,7 @@ namespace dimangeon_keeper
                 ShowEndDialogIfNeeded();
                 return;
             }
-
-
+            if (digSfxCooldown > 0f) digSfxCooldown -= dt;
             UpdateCamera(dt);
 
             UpdateGoblinSpawner(dt);
@@ -1060,6 +1098,7 @@ namespace dimangeon_keeper
         private void SpawnGoblin()
         {
             InitGoblinFramesOnce();
+            TeleportSfxRequested?.Invoke();
 
             Creature g = new Creature(portalX + 0.5f, portalY + 0.5f);
 
@@ -1196,8 +1235,8 @@ namespace dimangeon_keeper
         {
             if (knightFrames != null) return;
 
-            Bitmap k0 = Properties.Resources.ResourceManager.GetObject("sprite_knight0") as Bitmap;
-            Bitmap k1 = Properties.Resources.ResourceManager.GetObject("sprite_knight1") as Bitmap;
+            Bitmap k0 = Properties.Resources.sprite_knight0;
+            Bitmap k1 = Properties.Resources.sprite_knight1;
 
             if (k0 == null)
             {
@@ -1206,14 +1245,18 @@ namespace dimangeon_keeper
             }
             if (k1 == null) k1 = k0;
 
+            Bitmap k0Tight = ScaleToTileTight(k0);
+            Bitmap k1Tight = ScaleToTileTight(k1);
+
             // кадр 0 = idle, 1.. = walk
             knightFrames = new Bitmap[]
             {
-                ScaleToTile(k0),
-                ScaleToTile(k1),
-                ScaleToTile(k0)
+                k0Tight,
+                k1Tight,
+                k0Tight
             };
         }
+
         //dlya bossa
         private Bitmap ScaleToSize(Bitmap srcBmp, int w, int h)
         {
@@ -1233,6 +1276,44 @@ namespace dimangeon_keeper
             }
             return scaled;
         }
+        private Bitmap TrimTransparent(Bitmap src)
+        {
+            if (src == null) return null;
+
+            int minX = src.Width, minY = src.Height, maxX = -1, maxY = -1;
+
+            for (int y = 0; y < src.Height; y++)
+                for (int x = 0; x < src.Width; x++)
+                {
+                    var c = src.GetPixel(x, y);
+                    if (c.A == 0) continue;
+
+                    if (x < minX) minX = x;
+                    if (y < minY) minY = y;
+                    if (x > maxX) maxX = x;
+                    if (y > maxY) maxY = y;
+                }
+
+            if (maxX < 0) return src; // полностью прозрачный
+
+            int w = maxX - minX + 1;
+            int h = maxY - minY + 1;
+
+            Bitmap cropped = new Bitmap(w, h);
+            using (Graphics g = Graphics.FromImage(cropped))
+            {
+                g.DrawImage(src, new Rectangle(0, 0, w, h),
+                    new Rectangle(minX, minY, w, h), GraphicsUnit.Pixel);
+            }
+            return cropped;
+        }
+
+        private Bitmap ScaleToTileTight(Bitmap src)
+        {
+            Bitmap trimmed = TrimTransparent(src);
+            return ScaleToTile(trimmed); // твоя функция 32x32 NearestNeighbor
+        }
+
         private void InitKingFramesOnce()
         {
             if (kingFrames != null) return;
@@ -1396,9 +1477,14 @@ namespace dimangeon_keeper
         private readonly Font hubFont = new Font("Consolas", 14, FontStyle.Bold);
         private void DrawHub(Graphics g)
         {
+            Rectangle r = new Rectangle(0, 0, 850, 40);
+            Brush b = new SolidBrush(Color.Black);
+            g.FillRectangle(b, r);
+            g.DrawRectangle(Pens.Black, r);
             int totalGold = GetTotalGold();
             string text = $"Mode: {mode} | Gold: {totalGold}/{goldCapacity} | Beds: {bedCapacity} | Goblins {CountGoblins()} | (D=Dig, T=Treasury, L=Lair)";
             g.DrawString(text, hubFont, whitebrush, 8, 8);
+
             
         }
 
@@ -1890,13 +1976,14 @@ namespace dimangeon_keeper
 
                     if (dist <= AttackRange)
                     {
-                        c.State = CreatureState.Attacking;
+                        // оставляемся в Rallying, чтобы каждый кадр продолжать бить
                         c.AttackTimer += dt;
 
                         if (c.AttackTimer >= AttackInterval)
                         {
                             c.AttackTimer = 0f;
                             enemy.Hp -= c.Damage;
+
                             if (enemy.Hp <= 0)
                             {
                                 enemy.Hp = 0;
@@ -1905,6 +1992,7 @@ namespace dimangeon_keeper
                         }
                         return;
                     }
+
 
                     // если враг далеко — бежим к нему
                     c.RallyCell = new Point((int)enemy.X, (int)enemy.Y);
@@ -2087,6 +2175,7 @@ namespace dimangeon_keeper
             bool wasGold = (tile.Type == TileType.GoldRock);
 
             tile.Type = TileType.Dirt;
+            PlayDigSfx();
 
             MarkChunkDirtyByTile(job.X, job.Y);
             tile.HasDigJob = false;
