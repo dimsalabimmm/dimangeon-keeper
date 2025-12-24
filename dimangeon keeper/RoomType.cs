@@ -9,6 +9,7 @@ namespace dimangeon_keeper
     public enum RoomType
     {
         None,
-        Treasury //kazna 
+        Treasury, //kazna 
+        Lair
     }
 }

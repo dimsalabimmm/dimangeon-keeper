@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,6 +35,7 @@ namespace dimangeon_keeper
             }
             IsAssigned = true;
             AssignedTo = c;
+            
             return true;
         }
         //мне пофи у кого отменять, поэтому в параметр не передаю чела

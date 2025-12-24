@@ -10,15 +10,19 @@ namespace dimangeon_keeper
     {
         public TileType Type;
         public bool HasDigJob;
+        public bool DigJobAssigned;
+        public byte RoomVariant;
 
         public bool IsClaimed;
         public RoomType Room;
 
+        public int TreasuryGold;
 
         public Tile(TileType type)
         {
             Type = type;
             Room = RoomType.None;
+            RoomVariant = 0;
         }
     }
 }

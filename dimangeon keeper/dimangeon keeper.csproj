@@ -48,15 +48,12 @@
   <ItemGroup>
     <Compile Include="Creature.cs" />
     <Compile Include="DigJob.cs" />
-    <Compile Include="MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="MainForm.Designer.cs">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Game.cs" />
     <Compile Include="GamePanel.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -64,9 +61,6 @@
     <Compile Include="Tile.cs" />
     <Compile Include="TileType.cs" />
     <Compile Include="ToolMode.cs" />
-    <EmbeddedResource Include="MainForm.resx">
-      <DependentUpon>MainForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -107,6 +101,54 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\sprite_imp2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dungeon_heart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\treasury_floor.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\treasury_pile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\treasury_chest.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\goldrock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dirt.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lair_4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lair_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lair_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lair_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sprite_knight1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sprite_knight0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sprite_portal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sprite_king.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sprite_king1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -9,6 +9,7 @@ namespace dimangeon_keeper
     public enum ToolMode
     {
         Dig,
-        BuildTreasury
+        BuildTreasury,
+        BuildLair
     }
 }
